@@ -59,11 +59,11 @@ export default function(props) {
   return (
     
     <>
-    <div className="container" >
+    <div className="container" style={{color:props.mode=='dark'?'white':'black'}}>
         <div>
             <h3>{props.title}</h3>
             <div className="mb-3">
-                <textarea className="form-control" value={text} onChange={onOnchange} id="formText" rows="10"></textarea>
+                <textarea className="form-control" value={text} onChange={onOnchange} id="formText" style={{backgroundColor:props.mode=='dark'?'#020826':'white', color:props.mode=='dark'?'white':'black'}}rows="10"></textarea>
             </div>
             <button className="btn btn-primary mx-2" onClick={onUpClick}>Convert to uppercase</button>
             <button className="btn btn-primary mx-2" onClick={onLoClick}>Convert to lowercase</button>
