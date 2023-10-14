@@ -11,6 +11,12 @@ export default function(props) {
         setText(upperCase)
 
     }
+    function wordCals(text){
+        if(text.length===0)return 0;
+        //  console.log(text.trim().split(" "))
+        let arr=text.trim().split(" ")
+        return arr.filter(ele=>ele!=="").length
+    }
 
     function onLoClick(){
         let lowerCase=text.toLowerCase()
@@ -29,14 +35,9 @@ export default function(props) {
         setText("")
     }
 
-    function onCalculateSpaces(){
-        let count=0;
-        for(let i=0; i<text.length;i++){
-            if(text[i]==" "){
-                count++
-            }
-        }
-       setExtractedSpace(count)
+    function onRemoveSpaces(){
+        let newText=text.split(/[ ]+/)
+       setText(newText.join(" "))
     }
 
     function onEmailExtract(){
@@ -45,6 +46,11 @@ export default function(props) {
         setExtractedEmail(emails);
         props.showMsg("email extracted successfully","success")
         // setText(""+emails)
+    }
+    const onHandleCopy=()=>{
+        let text=document.getElementById('formText')
+        text.select()
+        navigator.clipboard.writeText(text.value)
     }
 
     function length(t){
@@ -70,15 +76,16 @@ export default function(props) {
             <button className="btn btn-primary mx-2" onClick={onLoClick}>Convert to lowercase</button>
             <button className="btn btn-primary mx-2" onClick={onReverseClick}>Reverse Text</button>
             <button className="btn btn-primary mx-2" onClick={onClearText}>Clear Text</button>
+            <button className="btn btn-primary mx-2" onClick={onHandleCopy}>Copy Text</button>
             <button className="btn btn-primary mx-2" onClick={onEmailExtract}>Extract email</button>
-            <button className="btn btn-primary mx-2" onClick={onCalculateSpaces}>number of space</button>
+            <button className="btn btn-primary mx-2" onClick={onRemoveSpaces}>remove spaces</button>
             
 
         </div>
     </div>
     <div className="container my-4">
         <h3>your text summary:</h3>
-        <p>{text.split(" ").length} words and {length(text)} letters</p>
+        <p>{wordCals(text)} words and {length(text)} letters</p>
         <p>{0.008 * text.split(" ").length} Minutes read</p>
         <h3>Preview:</h3>
         <p>{text}</p>
