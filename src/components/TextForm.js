@@ -43,6 +43,7 @@ export default function(props) {
         const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
         const emails = text.match(emailRegex) || ['no email present'];
         setExtractedEmail(emails);
+        props.showMsg("email extracted successfully","success")
         // setText(""+emails)
     }
 
