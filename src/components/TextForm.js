@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 
 
-export default function(props) {
+export default function TextForm(props) {
     const [text,setText]=useState('')
-    const [extractedEmail,setExtractedEmail]=useState(['click extract email'])
-    const [extractSpaces,setExtractedSpace]=useState('click extract spaces')
+    const [extractedEmail,setExtractedEmail]=useState(['Click Extract email button'])
+    // const [extractSpaces,setExtractedSpace]=useState('click extract spaces')
 
     function onUpClick(){
         let upperCase=text.toUpperCase()
@@ -43,7 +43,9 @@ export default function(props) {
     function onEmailExtract(){
         const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
         const emails = text.match(emailRegex) || ['no email present'];
-        setExtractedEmail(emails);
+        console.log(emails)
+        setExtractedEmail(emails.join(", "));
+        
         props.showMsg("email extracted successfully","success")
         // setText(""+emails)
     }
@@ -66,11 +68,11 @@ export default function(props) {
   return (
     
     <>
-    <div className="container" style={{color:props.mode=='dark'?'white':'black'}}>
+    <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
         <div>
             <h3>{props.title}</h3>
             <div className="mb-3">
-                <textarea className="form-control" value={text} onChange={onOnchange} id="formText" style={{backgroundColor:props.mode=='dark'?'#020826':'white', color:props.mode=='dark'?'white':'black'}}rows="10"></textarea>
+                <textarea className="form-control" value={text} onChange={onOnchange} id="formText" style={{backgroundColor:props.mode==='dark'?'#020826':'white', color:props.mode==='dark'?'white':'black'}}rows="10"></textarea>
             </div>
             <button className="btn btn-primary mx-2" onClick={onUpClick}>Convert to uppercase</button>
             <button className="btn btn-primary mx-2" onClick={onLoClick}>Convert to lowercase</button>
@@ -78,19 +80,22 @@ export default function(props) {
             <button className="btn btn-primary mx-2" onClick={onClearText}>Clear Text</button>
             <button className="btn btn-primary mx-2" onClick={onHandleCopy}>Copy Text</button>
             <button className="btn btn-primary mx-2" onClick={onEmailExtract}>Extract email</button>
-            <button className="btn btn-primary mx-2" onClick={onRemoveSpaces}>remove spaces</button>
+            <button className="btn btn-primary mx-2" onClick={onRemoveSpaces}>remove extra spaces</button>
             
 
         </div>
     </div>
     <div className="container my-4">
-        <h3>your text summary:</h3>
+        <h3>Your text summary:</h3>
         <p>{wordCals(text)} words and {length(text)} letters</p>
-        <p>{0.008 * text.split(" ").length} Minutes read</p>
+        <p>{text.length===0?0:0.008 * text.split(" ").length} Minutes read</p>
         <h3>Preview:</h3>
         <p>{text}</p>
-        <h3>extracted email:{extractedEmail}</h3>
-        <h3>number of spaces:{extractSpaces}</h3>
+        <h3>Extracted emails:</h3>
+        <h4 style={{color:"blue"}}>
+            {extractedEmail}
+             {/* <a href={`mailto:${extractedEmail}`}>{extractedEmail}</a> */}
+        </h4>
     </div>
     </>
     
