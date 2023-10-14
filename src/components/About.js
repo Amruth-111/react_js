@@ -1,34 +1,41 @@
 import React, { useState } from 'react'
 
-export default function About() {
-    const [btnChange,setBtnChange]=useState('Enable Dark Mode')
-    const [myStyle,setMyStyle]=useState({
-        color:'black',
-        backgroundColor:'white'
+export default function About(props) {
+    // const [btnChange,setBtnChange]=useState('Enable Dark Mode')
+    // const [myStyle,setMyStyle]=useState({
+    //     color:'black',
+    //     backgroundColor:'white'
        
-    })
+    // })
+    let myStyle={
+        color:props.mode==="dark"?'white':'black',
+        backgroundColor:props.mode==="dark"?'black':'white',
+        // border:"2px solid",
+        // borderColor:props.mode==="dark"?'white':'black',
 
-    let toggleBtn=()=>{
-        console.log('toggle button function is invoked')
-        if(myStyle.color==='white'){
-            setMyStyle({
-                color:'black',
-                backgroundColor:'white'
-            })
-            setBtnChange('Enable Dark Mode')
-            console.log(myStyle)
-        }else{
-            setMyStyle({
-                color:'white',
-                backgroundColor:'black'
-            })
-            setBtnChange('Enable Light Mode')
-            console.log(myStyle)
-        }
     }
+
+    // let toggleBtn=()=>{
+    //     console.log('toggle button function is invoked')
+    //     if(myStyle.color==='white'){
+    //         setMyStyle({
+    //             color:'black',
+    //             backgroundColor:'white'
+    //         })
+    //         setBtnChange('Enable Dark Mode')
+    //         console.log(myStyle)
+    //     }else{
+    //         setMyStyle({
+    //             color:'white',
+    //             backgroundColor:'black'
+    //         })
+    //         setBtnChange('Enable Light Mode')
+    //         console.log(myStyle)
+    //     }
+    // }
   return (
     <div className="container my-5" style={myStyle} >
-       
+       <h1 style={{color:props.mode==="dark"?'white':'black'}}>About Us</h1>
         <div className="accordion" id="accordionExample" style={myStyle} >
         <div className="accordion-item">
             <h2 className="accordion-header">
@@ -67,7 +74,7 @@ export default function About() {
             </div>
         </div>
         </div>
-        <div className="btn btn-primary my-3" onClick={toggleBtn}>{btnChange}</div>
+        {/* <div className="btn btn-primary my-3" onClick={toggleBtn}>{btnChange}</div> */}
 
     </div>
         
